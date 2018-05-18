@@ -1,0 +1,22 @@
+{
+  "name": "todolist-app",
+  "version": "1.0.0",
+  "description": "to do list no ambito do modulo de Reactjs na world academy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnxoWedge/ToDoList-App.git"
+  },
+  "author": "Ângelo Cunha",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AnxoWedge/ToDoList-App/issues"
+  },
+  "homepage": "https://github.com/AnxoWedge/ToDoList-App#readme",
+  "dependencies": {
+    "create-react-app": "^1.5.2"
+  }
+}
