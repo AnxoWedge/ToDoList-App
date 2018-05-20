@@ -20,12 +20,22 @@ class App extends Component {
 
 //============ React Life Cycle Functions =============
 
+componentWillMount(){
+  this.getLocalData()
+}
 
+componentWillReceiveProps(){
+  this.editit()
+}
+
+shouldComponentUpdate(){
+  return true
+}
 
 //============ JSON FUNCTION DATA SAVING ==============
-setLocalData(){
+setLocalData(task_array){
   this.setState({saving_msg:"Please hold while we process your data"})
-  localStorage.setItem("task_array",JSON.stringify("task_array"))
+  localStorage.setItem("task_array",JSON.stringify(task_array))
   setTimeout(()=>{
     this.setState({saving_msg:" "})
   }, 2500)
@@ -59,10 +69,12 @@ submitHandler(e){
       task_add:"",
       task_date:"", 
     });
+    this.setLocalData(this.state.task_array)
   }
   else{
     alert("to change");
   }
+  this.setLocalData(this.state.task_array)
 }
 
 handleAddition(e){
@@ -103,6 +115,8 @@ handleTaskChange(task_Index,e){
     task_array: this.state.task_array,
   })
 
+  this.setLocalData(this.state.task_array)
+
 }
 
 doneit(task_Index,e){
@@ -110,7 +124,8 @@ doneit(task_Index,e){
   this.setState({
     task_array: this.state.task_array,
   })
-  console.log(this.state.task_array[task_Index].state)
+
+  this.setLocalData(this.state.task_array)
 }
 
 
@@ -122,7 +137,7 @@ doneit(task_Index,e){
         <header className="App-header">
         </header>
         <p className="App-intro">
-          
+          O que pretende fazer hoje? 
         </p>
 
         <div className="list">

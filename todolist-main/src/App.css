@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+ul{
+  list-style: none;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -20,6 +24,11 @@
 
 .App-intro {
   font-size: large;
+}
+
+.App-intro::after, .App-intro::before{
+  content: " ";
+  border-bottom: 1px solid #000
 }
 
 @keyframes App-logo-spin {
