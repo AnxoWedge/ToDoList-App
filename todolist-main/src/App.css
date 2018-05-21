@@ -1,3 +1,7 @@
+body{
+  margin: 0;
+}
+
 .App {
   text-align: center;
 }
@@ -42,4 +46,25 @@ ul{
 }
 .done{
   background: #ff0
+}
+
+li{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  padding: 0.5em;
+  margin: 0.5em;
+  
+}
+
+li span{
+  width: 980px;
+}
+
+div>form {
+  max-width: 640px;
+  display: flex; 
+  flex-flow: row nowrap; 
+  justify-content: space-around;
+  margin: 0 auto;
 }

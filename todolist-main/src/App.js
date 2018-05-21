@@ -12,7 +12,7 @@ class App extends Component {
       task_time:"",
       task_state:"",
       saving_msg:"",
-      task_edit: false,
+      task_edit: "",
     }
   this.submitHandler=this.submitHandler.bind(this);
   this.handleAddition=this.handleAddition.bind(this);
@@ -58,7 +58,7 @@ submitHandler(e){
   if(this.state.task_add !==""){
     this.state.task_array.push({
       text:this.state.task_add,
-      state:this.state.task_state === "not_done" ? true : false,
+      state:this.state.task_state[0] === "not_done" ? true : false,
       date: {
         date:this.state.task_date,
         time:this.state.task_time,
@@ -68,6 +68,7 @@ submitHandler(e){
       task_array: this.state.task_array, 
       task_add:"",
       task_date:"", 
+      task_time: "",
     });
     this.setLocalData(this.state.task_array)
   }
@@ -81,6 +82,7 @@ handleAddition(e){
   this.setState({
     [e.target.name]: [e.target.value],
   });
+  
 }
 
 removeit(task_Index, e){
@@ -94,7 +96,7 @@ removeit(task_Index, e){
 
 editit(task_Index,e){
   this.setState({
-    task_editmode: this.state.task_editmode === task_Index ? null : task_Index,
+    task_edit: this.state.task_edit === task_Index ? null : task_Index,
   })
 
 
@@ -146,18 +148,18 @@ doneit(task_Index,e){
             return(
               
               <li key= {"task" + index} className={item.state ? "notdone" : "done"}>
-              <button onClick={this.doneit.bind(this,index)}>{item.state ? "Feito?" : "Feito!"}</button>
-              {this.state.task_editmode === index ? 
+              <button onClick={this.doneit.bind(this,index)}>{item.state ? "X" : "Feito!"}</button>
+              {this.state.task_edit === index ? 
               <form>
                 <input type="text" name="task_add" value={item.text} onChange={this.handleTaskChange.bind(this, index)}/>
                 <input type="time" name="task_time" value={item.date.time} onChange={this.handleTaskChange.bind(this, index)}/>
                 <input type="date" name="task_date" value={item.date.date} onChange={this.handleTaskChange.bind(this, index)}/>
                 </form>
-                : <span>{item.text} às {item.date.time} no dia {item.date.date}</span>
-                }
+                : <span>{item.text} {item.date.date && item.date.time !== "" ?  `às ${item.date.time} no dia ${item.date.date}` : ""}</span>
+                } 
               
               <button onClick={this.editit.bind(this,index)}>Editar</button>
-              <button onClick={this.removeit.bind(this,index)}>Remover</button>
+              <button onClick={this.removeit.bind(this,index)} disabled={(!isNaN(this.state.task_edit) && this.state.task_edit !== null)? "disabled" :  "" }>Remover</button>
               </li>
             
               ) 
@@ -169,8 +171,8 @@ doneit(task_Index,e){
           <input type="time" name="task_time" value={this.state.task_date.time} onChange={this.handleAddition}/>
           <input type="date" name="task_date" value={this.state.task_date.date} onChange={this.handleAddition}/>
           <select name="task_state" value={this.state.task_state} onChange={this.handleAddition}>
-          <option value="done">completo</option>
-          <option value="not_done">incompleto</option>
+            <option value="done" >completo</option>
+            <option value="not_done" >incompleto</option>
           </select>
           <button>Inserir</button>
         </form>
